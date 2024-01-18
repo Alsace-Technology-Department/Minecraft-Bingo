@@ -61,9 +61,9 @@ public class Team {
         if (notify) {
             player.sendMessage(
                     Game.PREFIX +
-                            "Joined "
+                            "加入了 "
                             + color + name
-                            + ChatColor.WHITE + " team"
+                            + ChatColor.WHITE + " 队"
             );
         }
     }

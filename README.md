@@ -1,76 +1,78 @@
-# Minecraft Bingo
-Item bingo in Minecraft
+# MinecraftBingo
+Minecraft中的物品Bingo
 
-![Item Bingo](https://i.imgur.com/7qXBAQK.png)
+![物品Bingo](https://i.imgur.com/7qXBAQK.png)
 
-## What is minecraft bingo?
-Minecraft Bingo is a gamemode in Minecraft in which teams battle in order to collect items on their bingo card.
-The first team to reach a completed row, column or diagonal wins the game.
-Collecting items is simply done through the vanilla game experience of minecraft.
+## 什么是MinecraftBingo？
+MinecraftBingo是Minecraft中的一种游戏模式，团队之间争夺以收集Bingo card上的物品为目标的比赛。
+首个完成一行、一列或对角线的团队获胜比赛。
+通过Minecraft的原生游戏体验来简单地收集物品。
 
-## Usage
-Players that have OP on the server have access to all commands. 
-Before being able to start the game, a player needs to create teams with the /team command. 
-Other settings can be configured as explained in the commands section below. 
-As soon as the game is started, teams are scattered across the map (players within teams are grouped together). 
-The teams work together to gather the items on their bingo card. 
-If a team successfully completed the card, the game ends. 
-When, however, the time limit is reached, a winner is decided based on the number of items collected by each of the teams. 
-The team with the highest number of items wins, or the game ends in a tie.
-Note that the bingo card can be right-clicked in order to view which items need to be gathered.
+## 使用方法
+在服务器上拥有OP权限的玩家可以使用所有命令。
+在能够开始游戏之前，玩家需要使用/team命令创建团队。
+其他设置可以在下面的命令部分中进行配置。
+游戏一旦开始，团队将分散在地图上（团队内的玩家将被分组在一起）。
+团队合作收集Bingo card上的物品。
+如果一个团队成功完成了卡片，游戏结束。
+然而，当达到时间限制时，根据每个团队收集的物品数量决定获胜者。
+物品数量最多的团队获胜，或游戏以平局结束。
+请注意，可以右键单击Bingo card以查看需要收集的物品。
 
-## Install
-Download the [latest release](https://github.com/Extremelyd1/minecraft-bingo/releases/latest) or compile it yourself using Gradle.
-The plugin requires either a [Spigot](https://www.spigotmc.org/) or [Paper](https://papermc.io/) server to run.
-Place the `MinecraftBingo-[version].jar` file in the plugins directory of your server.
-Unzip the `item_data.zip` into the `<server>/plugins/MinecraftBingo/` directory.
-If done successfully, you should have the following two directories:
+## 安装
+下载[最新版本](https://github.com/Extremelyd1/minecraft-bingo/releases/latest)或使用Gradle自行编译。
+该插件需要在[Spigot](https://www.spigotmc.org/)或[Paper](https://papermc.io/)服务器上运行。
+将`MinecraftBingo-[version].jar`文件放入服务器的插件目录。
+将`item_data.zip`解压到`<server>/plugins/MinecraftBingo/`目录。
+如果成功完成，应该会有以下两个目录：
 - `<server>/plugins/MinecraftBingo/item_data/`
 - `<server>/plugins/MinecraftBingo/item_data/images/`
 
-The first time you run the plugin a config file will be generated in `<server>/plugins/MinecraftBingo`, in which you can edit some configuration settings.
+第一次运行插件时，将在`<server>/plugins/MinecraftBingo`目录中生成一个配置文件，您可以在其中编辑一些配置设置。
 
-## Commands
-#### Team manage command
+## 命令
+#### 团队管理命令
 - `/team [random|add|remove]`
-  - `/team random <number of teams> [-e] [players...]` Create a set number of teams dividing the players randomly over them. If given a list of player names, it will only create teams with those players (or exclude those player if the flag `-e` is given).
-  - `/team add <player name> <team name>` Add a player to a given team  
-  Possible team names are: Red, Blue, Green, Yellow, Pink, Aqua, Orange, Gray
-  - `/team remove <player name>` Remove a player from a given team
+  - `/team random <number of teams> [-e] [players...]` 随机将玩家分配到一组团队。如果给定了玩家列表，它将仅为这些玩家创建团队（如果使用`-e`标志，则排除这些玩家）。
+  - `/team add <player name> <team name>` 将玩家添加到指定的团队
+    可用的团队名称有：Red、Blue、Green、Yellow、Pink、Aqua、Orange、Gray
+  - `/team remove <player name>` 从指定的团队中移除玩家
 
-#### Game start/end commands
-- `/start` Start the game
-- `/end` End the game
+#### 游戏开始/结束
+- `/start` 开始游戏
+- `/end` 结束游戏
 
-#### Configuration commands  
-- `/pvp` Enable/disable PvP
-- `/maintenance` Enable maintenance mode (this will disallow all non-OP players from joining)
-- `/wincondition <full|lines|lockout> [number]` Change the wincondition to either a full card, a number of lines (rows, columns or diagonals) to complete in order to win or lockout. 
-  In case of 'lines' or 'lockout' you can specify a number to indicate how many lines needed to be completed, or after how many collections an item locks.
-  (alias: `/wincon`)
-- `/itemdistribution <S> <A> <B> <C> <D>` Change the item distribution scales, the number of S, A, B, C, and D tier items that appear on the bingo card. 
-  These numbers must add up to 25. (aliases: `/itemdist`, `/distribution`, `/dist`)
-- `/timer <enable|disable|length>` Enable/disable the timer or set the length of the timer (the length can be specified in hours/minutes/seconds, such as `/timer 10m` or `/timer 1h20m30s`)
+#### 配置命令
+- `/pvp` 启用/禁用PvP
+- `/maintenance` 启用维护模式（这将阻止所有非OP玩家加入）
+- `/wincondition <full|lines|lockout> [number]` 将获胜条件更改为完成整张卡片、完成一定数量的线（行、列或对角线）或锁定物品。
+  对于'lines'或'lockout'，您可以指定需要完成的线的数量，或者在多少次收集后锁定物品。
+  （别名：`/wincon`）
+- `/itemdistribution <S> <A> <B> <C> <D>` 更改物品分发比例，Bingo card上出现的S、A、B、C和D级物品的数量。
+  这些数字必须加起来等于25。（别名：`/itemdist`、`/distribution`、`/dist`）
+- `/timer <enable|disable|length>` 启用/
 
-#### Miscellaneous commands
-- `/bingo` Check the items on the card
-- `/card` Receive a new bingo card (if somehow lost)
-- `/reroll` Re-roll the items on the bingo card
-- `/coordinates [message]` Sends your current coordinates to your team, optionally with a message (aliases: `/coord`, `/coords`)
-- `/all [message]` Allows players to talk to all players in the game (aliases: `/a`, `/g`, `/global`)
-- `/teamchat [message]` Allows players to talk to their team members (alias: `/tc`)
-- `/channel <team|global>` Allows players to switch the default chat channel that chat messages will be sent to (alias `/c`)
-- `/join [team name]` Allows players to join a team by the given name
+禁用计时器或设置计时器的长度（长度可以用小时/分钟/秒指定，例如`/timer 10m`或`/timer 1h20m30s`）
 
-## World generation
-The plugin offers the ability to pre-generate worlds to reduce chunk generation lag during gameplay.
-This feature can be used both on [Spigot](https://www.spigotmc.org/) and on [Paper](https://papermc.io/), but will be significantly faster on Paper.
-The following command can be used to manage this:
-- `/generate <start world number> <number of worlds>` Start pre-generating the given number of worlds from the given index and storing them in zip format
-- `/generate stop` Stop pre-generating worlds  
+#### 杂项命令
+- `/bingo` 检查卡上的物品
+- `/card` 获取新的Bingo card（如果不慎丢失）
+- `/reroll` 重新抽取Bingo card上的物品
+- `/coordinates [message]` 将当前坐标发送给您的团队，可选附带消息（别名：`/coord`、`/coords`）
+- `/all [message]` 允许玩家与游戏中的所有玩家交谈（别名：`/a`、`/g`、`/global`）
+- `/teamchat [message]` 允许玩家与他们的团队成员交谈（别名：`/tc`）
+- `/channel <team|global>` 允许玩家切换默认的聊天频道，以发送聊天消息（别名`/c`）
+- `/join [team name]` 允许玩家根据给定的名称加入一个团队
 
-This command only works if the config value `pregeneration-mode.enabled` is set to `True`.
-Pre-generation also requires you to set a world border for the worlds you want to have generated.
-The sizes for these borders can be set in the config file: `border.overworld-size` and `border.nether-size`.
-All chunks within the world border, including a buffer of 2 chunks outside the world border will be generated in this process.
-When finished, the directories for the overworld and nether will be zipped as `world[number].zip` and placed in `<server>/plugins/MinecrftBingo/worlds/` directory.
+## 世界生成
+该插件提供了预生成世界以减少游戏过程中的区块生成延迟的功能。
+此功能可在[Spigot](https://www.spigotmc.org/)和[Paper](https://papermc.io/)上使用，但在Paper上速度会明显更快。
+以下命令可用于管理此功能：
+- `/generate <start world number> <number of worlds>` 开始预生成给定数量的世界，从给定索引开始，并以zip格式存储它们
+- `/generate stop` 停止预生成世界
+
+此命令仅在配置值`pregeneration-mode.enabled`设置为`True`时有效。
+预生成还要求您为要生成的世界设置世界边界。
+这些边界的大小可以在配置文件中设置：`border.overworld-size`和`border.nether-size`。
+此过程将生成世界边界内的所有区块，包括世界边界外2个区块的缓冲区。
+完成后，overworld和nether的目录将被压缩为`world[number].zip`并放置在`<server>/plugins/MinecrftBingo/worlds/`目录中。

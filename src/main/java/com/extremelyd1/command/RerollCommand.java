@@ -32,7 +32,7 @@ public class RerollCommand implements TabExecutor {
         if (!game.getState().equals(Game.State.IN_GAME)) {
             sender.sendMessage(
                     ChatColor.DARK_RED + "Error: "
-                            + ChatColor.WHITE + "Can only use this command in game"
+                            + ChatColor.WHITE + "你不能在游戏中使用此命令"
             );
 
             return true;

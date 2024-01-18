@@ -21,7 +21,7 @@ public class TitleManager {
         for (Player player : Bukkit.getOnlinePlayers()) {
             player.sendTitle(
                     ChatColor.BOLD.toString() + ChatColor.BLUE + "BINGO",
-                    "Game has started!",
+                    "游戏开始!",
                     10,
                     30,
                     10
@@ -38,22 +38,18 @@ public class TitleManager {
         String subtitle = "";
 
         switch (winReason.getReason()) {
-            case COMPLETE:
+            case COMPLETE -> {
                 PlayerTeam team = winReason.getTeam();
-
                 title = ChatColor.BOLD.toString() + ChatColor.BLUE + "BINGO";
                 subtitle = team.getColor() + team.getName()
-                        + ChatColor.WHITE + " team "
-                        + "has won the game!";
-                break;
-            case RANDOM_TIE:
-                title = "Game has ended!";
-                subtitle = ChatColor.BLUE + "It is a tie";
-                break;
-            case NO_WINNER:
-            default:
-                title = "Game has ended!";
-                break;
+                        + ChatColor.WHITE + " 队 "
+                        + "赢得了胜利!";
+            }
+            case RANDOM_TIE -> {
+                title = "游戏结束!";
+                subtitle = ChatColor.BLUE + "平局";
+            }
+            default -> title = "游戏结束!";
         }
 
         for (Player player : Bukkit.getOnlinePlayers()) {

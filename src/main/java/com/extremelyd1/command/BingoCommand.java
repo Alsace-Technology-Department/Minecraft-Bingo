@@ -41,7 +41,7 @@ public class BingoCommand implements TabExecutor {
 
         if (!game.getState().equals(Game.State.IN_GAME)) {
             player.sendMessage(
-                    ChatColor.DARK_RED + "Error: " + ChatColor.WHITE + "Can not execute this command now"
+                    ChatColor.DARK_RED + "Error: " + ChatColor.WHITE + "现在无法执行此命令"
             );
 
             return true;
@@ -50,7 +50,7 @@ public class BingoCommand implements TabExecutor {
         Team team = game.getTeamManager().getTeamByPlayer(player);
         if (team == null || team.isSpectatorTeam()) {
             player.sendMessage(
-                    ChatColor.DARK_RED + "Error: " + ChatColor.WHITE + "Can not execute this command as spectator"
+                    ChatColor.DARK_RED + "Error: " + ChatColor.WHITE + "无法以旁观者身份执行此命令"
             );
 
             return true;
@@ -74,7 +74,7 @@ public class BingoCommand implements TabExecutor {
         String itemsLeftString;
 
         if (itemsLeft.size() == 0) {
-            itemsLeftString = ChatColor.GRAY + "No items";
+            itemsLeftString = ChatColor.GRAY + "没有物品";
         } else {
             itemsLeftString = ChatColor.AQUA + itemsLeft.stream()
                     .map(StringUtil::formatMaterialName)
@@ -84,7 +84,7 @@ public class BingoCommand implements TabExecutor {
         String itemsCollectedString;
 
         if (itemsCollected.size() == 0) {
-            itemsCollectedString = ChatColor.GRAY + "No items";
+            itemsCollectedString = ChatColor.GRAY + "没有物品";
         } else {
             itemsCollectedString = ChatColor.AQUA + itemsCollected.stream()
                     .map(StringUtil::formatMaterialName)
@@ -92,9 +92,9 @@ public class BingoCommand implements TabExecutor {
         }
 
         String response = Game.PREFIX
-                + "Items left on the board:\n"
+                + "在板上的物品:\n"
                 + itemsLeftString
-                + ChatColor.WHITE + "\nItems already collected:\n"
+                + ChatColor.WHITE + "\n已经收集到的物品:\n"
                 + itemsCollectedString;
 
         player.sendMessage(response);

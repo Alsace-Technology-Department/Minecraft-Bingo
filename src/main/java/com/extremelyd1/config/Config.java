@@ -109,6 +109,16 @@ public class Config {
      */
     private final int preGameBorderRadius;
 
+    /**
+     * When automatically starting the game, the number of players in each team
+     */
+    private final int playerPreTeam;
+
+    /**
+     * When the number of players reaches this number, it will automatically start
+     */
+    private final int minPlayers;
+
     public Config(JavaPlugin plugin) throws IllegalArgumentException {
         plugin.saveDefaultConfig();
         
@@ -165,6 +175,9 @@ public class Config {
         preGenerateWorlds = borderEnabled && config.getBoolean("pregeneration-mode.enable");
 
         preGameBorderRadius = config.getInt("pregame.border-radius");
+
+        playerPreTeam = config.getInt("auto-start.players-pre-team");
+        minPlayers = config.getInt("auto-start.min-plaers");
     }
 
     /**
@@ -288,5 +301,13 @@ public class Config {
 
     public int getPreGameBorderRadius() {
         return preGameBorderRadius;
+    }
+
+    public int getPlayerPreTeam() {
+        return playerPreTeam;
+    }
+
+    public int getMinPlayers() {
+        return minPlayers;
     }
 }

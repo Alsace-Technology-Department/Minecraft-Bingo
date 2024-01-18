@@ -47,7 +47,7 @@ public class TeamCommand implements TabExecutor {
                     ChatColor.DARK_RED
                             + "Error: "
                             + ChatColor.WHITE
-                            + "Cannot execute this command now"
+                            + "当前无法执行此命令"
             );
 
             return true;
@@ -66,7 +66,7 @@ public class TeamCommand implements TabExecutor {
             } catch (NumberFormatException e) {
                 sender.sendMessage(
                         ChatColor.DARK_RED + "Error: "
-                                + ChatColor.WHITE + "Could not parse team size argument"
+                                + ChatColor.WHITE + "无法解析团队规模参数"
                 );
 
                 return true;
@@ -75,7 +75,7 @@ public class TeamCommand implements TabExecutor {
             if (numTeams <= 0) {
                 sender.sendMessage(
                         ChatColor.DARK_RED + "Error: "
-                            + ChatColor.WHITE + "Cannot create less than 1 team"
+                            + ChatColor.WHITE + "不能创建1支以下的队伍"
                 );
 
                 return true;
@@ -84,7 +84,7 @@ public class TeamCommand implements TabExecutor {
             if (numTeams >= TeamManager.MAX_TEAMS) {
                 sender.sendMessage(
                         ChatColor.DARK_RED + "Error: "
-                                + ChatColor.WHITE + "Cannot create more than 8 teams"
+                                + ChatColor.WHITE + "不能创建8支以上的队伍"
                 );
 
                 return true;
@@ -103,7 +103,7 @@ public class TeamCommand implements TabExecutor {
                     if (excludedPlayers.size() == 0) {
                         sender.sendMessage(
                                 ChatColor.DARK_RED + "Error: "
-                                        + ChatColor.WHITE + "Could not find the given players"
+                                        + ChatColor.WHITE + "找不到指定的玩家"
                         );
 
                         return true;
@@ -121,7 +121,7 @@ public class TeamCommand implements TabExecutor {
             if (players.size() == 0) {
                 sender.sendMessage(
                         ChatColor.DARK_RED + "Error: "
-                                + ChatColor.WHITE + "There are no players to create teams with"
+                                + ChatColor.WHITE + "没有可以创建队伍的玩家"
                 );
 
                 return true;

@@ -42,8 +42,8 @@ public class ProgressController {
                 Bukkit.broadcastMessage(
                         PREFIX +
                                 collectorTeam.getColor() + collectorTeam.getName()
-                                + ChatColor.WHITE + " team has collected "
-                                + ChatColor.AQUA + collectorTeam.getNumCollected() + ChatColor.WHITE + " items"
+                                + ChatColor.WHITE + " 队已收集 "
+                                + ChatColor.AQUA + collectorTeam.getNumCollected() + ChatColor.WHITE + " 个物品"
                 );
             }
         } else if (winConditionChecker.getNumLinesToComplete() > 0) {
@@ -54,8 +54,8 @@ public class ProgressController {
                     Bukkit.broadcastMessage(
                             PREFIX +
                                     collectorTeam.getColor() + collectorTeam.getName()
-                                    + ChatColor.WHITE + " team has completed "
-                                    + ChatColor.AQUA + linesCompletedNow + ChatColor.WHITE + " lines"
+                                    + ChatColor.WHITE + " 队完成了 "
+                                    + ChatColor.AQUA + linesCompletedNow + ChatColor.WHITE + " 条线"
                     );
                 }
             }
@@ -64,8 +64,8 @@ public class ProgressController {
                 Bukkit.broadcastMessage(
                         PREFIX +
                                 collectorTeam.getColor() + collectorTeam.getName()
-                                + ChatColor.WHITE + " team has collected "
-                                + ChatColor.AQUA + collectorTeam.getNumCollected() + ChatColor.WHITE + " items"
+                                + ChatColor.WHITE + " 队已收集 "
+                                + ChatColor.AQUA + collectorTeam.getNumCollected() + ChatColor.WHITE + " 个物品"
                 );
             }
         }

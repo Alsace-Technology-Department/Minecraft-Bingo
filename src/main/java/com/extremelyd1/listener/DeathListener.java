@@ -63,7 +63,7 @@ public class DeathListener implements Listener {
                     game.getBingoCardItemFactory().create(game.getBingoCard(), playerTeam)
             );
             player.sendMessage(
-                    Game.PREFIX + "You have been given a new bingo card"
+                    Game.PREFIX + "你获得了一张新的Bingo card"
             );
         }
     }

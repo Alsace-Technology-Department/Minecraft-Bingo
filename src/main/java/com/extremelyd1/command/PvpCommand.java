@@ -32,13 +32,13 @@ public class PvpCommand implements TabExecutor {
 
         game.togglePvp();
 
-        if (!game.isPvpEnabled()) {
+        if (game.isPvpEnabled()) {
             Bukkit.broadcastMessage(
-                    Game.PREFIX + "PVP is now " + ChatColor.DARK_RED + "disabled"
+                    Game.PREFIX + "PVP is now " + ChatColor.DARK_RED + "enabled"
             );
         } else {
             Bukkit.broadcastMessage(
-                    Game.PREFIX + "PVP is now " + ChatColor.GREEN + "enabled"
+                    Game.PREFIX + "PVP is now " + ChatColor.GREEN + "disabled"
             );
         }
 

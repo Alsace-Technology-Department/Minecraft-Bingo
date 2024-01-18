@@ -37,7 +37,7 @@ public class CardCommand implements TabExecutor {
 
         if (!game.getState().equals(Game.State.IN_GAME)) {
             player.sendMessage(
-                    ChatColor.DARK_RED + "Error: " + ChatColor.WHITE + "Can not execute this command now"
+                    ChatColor.DARK_RED + "Error: " + ChatColor.WHITE + "现在无法执行此命令"
             );
 
             return true;
@@ -46,14 +46,14 @@ public class CardCommand implements TabExecutor {
         Team team = game.getTeamManager().getTeamByPlayer(player);
         if (team == null || team.isSpectatorTeam()) {
             player.sendMessage(
-                    ChatColor.DARK_RED + "Error: " + ChatColor.WHITE + "Can not execute this command as spectator"
+                    ChatColor.DARK_RED + "Error: " + ChatColor.WHITE + "无法以旁观者身份执行此命令"
             );
 
             return true;
         }
 
         if (ItemUtil.hasBingoCard(player)) {
-            player.sendMessage(Game.PREFIX + "You already have a bingo card in your inventory");
+            player.sendMessage(Game.PREFIX + "你的库存中已经有一张Bingo card了");
 
             return true;
         }
@@ -62,7 +62,7 @@ public class CardCommand implements TabExecutor {
                 game.getBingoCardItemFactory().create(game.getBingoCard(), (PlayerTeam) team)
         );
         player.sendMessage(
-                Game.PREFIX + "You have been given a new bingo card"
+                Game.PREFIX + "您已获得一张新Bingo card"
         );
 
         return true;

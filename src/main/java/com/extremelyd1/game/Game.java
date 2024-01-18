@@ -28,6 +28,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.io.File;
 import java.util.HashMap;
@@ -45,7 +46,7 @@ public class Game {
     /**
      * The divider string
      */
-    private static final String DIVIDER = PREFIX + ChatColor.STRIKETHROUGH
+    private static final String         DIVIDER = PREFIX + ChatColor.STRIKETHROUGH
             + "                                                                        ";
 
     /**
@@ -114,7 +115,7 @@ public class Game {
     /**
      * Whether PvP is enabled
      */
-    private boolean pvpEnabled = false;
+    private boolean pvpEnabled = true;
 
     /**
      * The bingo card that is currently used
@@ -163,6 +164,7 @@ public class Game {
 
     /**
      * Register all event listeners
+     *
      * @param plugin The plugin instance to register the listeners to
      */
     private void registerListeners(JavaPlugin plugin) {
@@ -185,6 +187,7 @@ public class Game {
 
     /**
      * Register all commands
+     *
      * @param plugin The plugin instance to register the commands to
      */
     private void registerCommands(JavaPlugin plugin) {
@@ -233,17 +236,19 @@ public class Game {
 
     /**
      * Starts the game
+     *
      * @param player The player that started the game, or null if no player started the game
      */
     public void start(Player player) {
         // Sanity checks
         if (teamManager.getNumActiveTeams() == 0) {
-            getLogger().warning("No teams have been selected, cannot start game");
+            getLogger().warning("尚未选择队伍，无法开始比赛");
 
             if (player != null) {
+                //noinspection deprecation,UsagesOfObsoleteApi
                 player.sendMessage(
                         ChatColor.DARK_RED + "Error: "
-                                + ChatColor.WHITE + "No teams have been selected, cannot start game"
+                                + ChatColor.WHITE + "尚未选择队伍，无法开始比赛"
                 );
             }
 
@@ -269,9 +274,12 @@ public class Game {
 
         if (player != null) {
             player.sendMessage(
-                    Game.PREFIX + "Preparing spawn locations for teams..."
+                    Game.PREFIX + "为团队准备重生地点..."
             );
+        } else {
+            Bukkit.broadcastMessage(ChatColor.YELLOW + "为团队准备重生地点...");
         }
+
 
         // Create the spawn loader to determine and chunk-load spawn locations
         new SpawnLoader(this, worldManager, locations, spawns -> onSpawnsLoaded(player, spawns)).start();
@@ -279,14 +287,17 @@ public class Game {
 
     /**
      * Callback method for when spawns are loaded.
-     * @param player The player that issued the game start, which resulted in loading spawns.
+     *
+     * @param player    The player that issued the game start, which resulted in loading spawns.
      * @param locations The locations of the spawns.
      */
     private void onSpawnsLoaded(Player player, List<Location> locations) {
         if (player != null) {
             player.sendMessage(
-                    Game.PREFIX + "Spawn locations found, starting game"
+                    Game.PREFIX + "已找到生成位置，开始游戏"
             );
+        } else {
+            Bukkit.broadcastMessage(ChatColor.YELLOW + "已找到生成位置，开始游戏");
         }
 
         this.state = State.IN_GAME;
@@ -350,9 +361,10 @@ public class Game {
         gameBoardManager.broadcast();
 
         // Broadcast start message
+        //noinspection deprecation
         Bukkit.broadcastMessage(
                 DIVIDER + "\n"
-                        + PREFIX + "                           Game has started!\n"
+                        + PREFIX + "                           游戏开始!\n"
                         + DIVIDER
         );
 
@@ -386,26 +398,23 @@ public class Game {
 
     /**
      * Ends the game with a win reason
+     *
      * @param winReason The reason for the game to end
      */
     public void end(WinReason winReason) {
         String message = DIVIDER + "\n" + PREFIX;
 
         switch (winReason.getReason()) {
-            case COMPLETE:
+            case COMPLETE -> {
                 PlayerTeam team = winReason.getTeam();
                 message += "                     " + team.getColor() + team.getName()
-                        + ChatColor.WHITE + " team "
-                        + "has gotten bingo!";
-                break;
-            case RANDOM_TIE:
+                        + ChatColor.WHITE + " 队伍 "
+                        + "成功Bingo！";
+            }
+            case RANDOM_TIE ->
                 // Don't do anything with ties yet
-                message += "                      Game has ended in a tie!";
-                break;
-            case NO_WINNER:
-            default:
-                message += "                            Game has ended!";
-                break;
+                    message += "                      游戏以平局结束！";
+            default -> message += "                            游戏结束！";
         }
 
         message += "\n" + DIVIDER;
@@ -450,6 +459,7 @@ public class Game {
                 // Set own bingo card in offhand if player has a team
                 Team team = teamManager.getTeamByPlayer(onlinePlayer);
                 if (team != null && !team.isSpectatorTeam()) {
+                    //noinspection SuspiciousMethodCalls
                     onlinePlayer.getInventory().setItemInOffHand(
                             bingoCardItemStacks.get(team)
                     );
@@ -470,6 +480,14 @@ public class Game {
                     );
                 }
             }
+            Bukkit.broadcastMessage(ChatColor.YELLOW + "地图正在重置，20s后将传送回大厅");
+            // shutdown Server
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    Bukkit.shutdown();
+                }
+            }.runTaskLater(plugin, 20 * 20L);
         }
 
         soundManager.broadcastEnd();
@@ -508,6 +526,7 @@ public class Game {
     /**
      * Called if the pregame state is updated
      * Updates the game board scoreboard
+     *
      * @param numOnlinePlayers The number of online players used to update
      */
     public void onPregameUpdate(int numOnlinePlayers) {
@@ -517,13 +536,14 @@ public class Game {
     /**
      * When a material is collected by a player
      * Updates the bingo card of the player's team and ends the game if a card is completed
-     * @param player The player that has collected the material
+     *
+     * @param player   The player that has collected the material
      * @param material The material that is collected
      */
     public void onMaterialCollected(Player player, Material material) {
         Team team = teamManager.getTeamByPlayer(player);
         if (team == null || team.isSpectatorTeam()) {
-            getLogger().warning("Material collected by player without team");
+            getLogger().warning("没有团队的玩家收集的材料");
             return;
         }
 
@@ -539,7 +559,7 @@ public class Game {
                 Bukkit.broadcastMessage(
                         PREFIX +
                                 collectorTeam.getColor() + collectorTeam.getName()
-                                + ChatColor.WHITE + " team has obtained "
+                                + ChatColor.WHITE + " 队已经获得 "
                                 + ChatColor.AQUA + StringUtil.formatMaterialName(material)
                 );
             }
@@ -646,9 +666,9 @@ public class Game {
     }
 
     public enum State {
-        PRE_GAME("Pre-game"),
-        IN_GAME("In-game"),
-        POST_GAME("Post-game");
+        PRE_GAME("准备中"),
+        IN_GAME("游戏中"),
+        POST_GAME("结算");
 
         private final String name;
 

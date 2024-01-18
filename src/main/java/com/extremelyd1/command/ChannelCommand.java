@@ -42,8 +42,8 @@ public class ChannelCommand implements TabExecutor {
             ChatChannelController.ChatChannel channel = ChatChannelController.ChatChannel.valueOf(args[0].toUpperCase());
             game.getChatChannelController().setPlayerChatChannel(player, channel);
             player.sendMessage(
-                    ChatColor.GREEN + "Successfully"
-                            + ChatColor.WHITE + " updated chat channel to "
+                    ChatColor.GREEN + "成功"
+                            + ChatColor.WHITE + " 将聊天频道更新为 "
                             + ChatColor.YELLOW + channel.name()
             );
         } catch (IllegalArgumentException ex) {

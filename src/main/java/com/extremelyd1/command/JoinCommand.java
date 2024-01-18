@@ -35,7 +35,7 @@ public class JoinCommand implements TabExecutor {
                     ChatColor.DARK_RED
                             + "Error: "
                             + ChatColor.WHITE
-                            + "Cannot execute this command now"
+                            + "现在无法执行此命令"
             );
 
             return true;
@@ -57,7 +57,7 @@ public class JoinCommand implements TabExecutor {
                     ChatColor.DARK_RED
                             + "Error: "
                             + ChatColor.WHITE
-                            + "Could not find team with that name"
+                            + "找不到该队伍"
             );
         }
 

@@ -38,7 +38,7 @@ public class TeamChatCommand implements TabExecutor {
         String message = String.join(" ", strings);
 
         if (team == null) {
-            player.sendMessage(ChatColor.RED + "ERROR: " + ChatColor.WHITE + "You are not on a team");
+            player.sendMessage(ChatColor.RED + "ERROR: " + ChatColor.WHITE + "你不在任何一个队伍中");
         } else {
             for (Player p : team.getPlayers()) {
                 p.sendMessage(team.getColor() + "TEAM " + player.getName() + ChatColor.WHITE + ": " + message);

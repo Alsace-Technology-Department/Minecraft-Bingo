@@ -33,7 +33,7 @@ public class StartCommand implements TabExecutor {
         if (game.getState().equals(Game.State.IN_GAME)) {
             sender.sendMessage(
                     ChatColor.DARK_RED + "Error: "
-                            + ChatColor.WHITE + "cannot start game, it already has been started"
+                            + ChatColor.WHITE + "开始失败，已经存在一个游戏"
             );
 
             return true;

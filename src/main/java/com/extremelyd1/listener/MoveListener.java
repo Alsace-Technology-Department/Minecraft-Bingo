@@ -30,7 +30,7 @@ public class MoveListener implements Listener {
             if (e.getTo().distance(spawnLocation) > game.getConfig().getPreGameBorderRadius()) {
                 e.getPlayer().sendMessage(
                         ChatColor.DARK_RED + "Error: "
-                                + ChatColor.WHITE + "You cannot move away from the spawn in the pre-game"
+                                + ChatColor.WHITE + "你不能在等待时离开出生点"
                 );
                 e.getPlayer().teleport(spawnLocation);
             }

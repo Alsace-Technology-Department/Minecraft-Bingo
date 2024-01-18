@@ -35,17 +35,17 @@ public class PregameBoard extends GameBoard {
         int numberOfSpaces = 1;
         this.boardEntries.add(new BlankBoardEntry(numberOfSpaces++));
         this.boardEntries.add(new BoardEntry(
-                "Status: " + ChatColor.YELLOW + "Pre-Game"
+                "状态: " + ChatColor.YELLOW + "准备中"
         ));
-        this.boardEntries.add(new BoardEntry("Waiting for players..."));
+        this.boardEntries.add(new BoardEntry("等待玩家加入..."));
         this.boardEntries.add(new BlankBoardEntry(numberOfSpaces++));
         numPlayersEntry = new DynamicBoardEntry<>(
-                "Players: " + ChatColor.YELLOW + "%d",
+                "玩家: " + ChatColor.YELLOW + "%d",
                 0
         );
         this.boardEntries.add(numPlayersEntry);
         this.boardEntries.add(new BlankBoardEntry(numberOfSpaces++));
-        this.boardEntries.add(new BoardEntry("Item Distribution:"));
+        this.boardEntries.add(new BoardEntry("物品分布:"));
 
         currentItemDistribution = new DynamicBoardEntry<>(
                 "%s",
@@ -65,14 +65,14 @@ public class PregameBoard extends GameBoard {
         this.boardEntries.add(new BlankBoardEntry(numberOfSpaces++));
 
         timerStatus = new DynamicBoardEntry<>(
-                "Timer: %s",
+                "时间: %s",
                 "00:00"
         );
         this.boardEntries.add(timerStatus);
         this.boardEntries.add(new BlankBoardEntry(numberOfSpaces++));
 
         gameTypeEntry = new DynamicBoardEntry<>(
-                "Game Type: %s",
+                "游戏模式: %s",
                 "-"
         );
         this.boardEntries.add(gameTypeEntry);

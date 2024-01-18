@@ -16,7 +16,7 @@ public class DisabledCommand implements TabExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         sender.sendMessage(
                 ChatColor.DARK_RED + "Error: "
-                        + ChatColor.WHITE + "this command is currently disabled"
+                        + ChatColor.WHITE + "该命令当前已禁用"
         );
 
         return true;

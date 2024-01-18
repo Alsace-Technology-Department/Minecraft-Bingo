@@ -68,4 +68,15 @@ public class SoundManager {
         }
     }
 
+    public void startWait() {
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            player.playSound(
+                    player.getLocation(),
+                    Sound.BLOCK_NOTE_BLOCK_BELL,
+                    9999.0f,
+                    1.0f
+            );
+        }
+    }
+
 }

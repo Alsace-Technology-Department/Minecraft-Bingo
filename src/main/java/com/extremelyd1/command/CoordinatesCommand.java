@@ -36,7 +36,7 @@ public class CoordinatesCommand implements TabExecutor {
         if (game.getState().equals(Game.State.PRE_GAME)) {
             sender.sendMessage(
                     ChatColor.DARK_RED + "Error: "
-                            + ChatColor.WHITE + "Cannot execute this command in pregame"
+                            + ChatColor.WHITE + "无法在赛前执行此命令"
             );
             return true;
         }
@@ -47,7 +47,7 @@ public class CoordinatesCommand implements TabExecutor {
         if (team == null || team.isSpectatorTeam()) {
             player.sendMessage(
                     ChatColor.DARK_RED + "Error: "
-                            + ChatColor.WHITE + "Cannot execute this command as spectator"
+                            + ChatColor.WHITE + "无法以旁观者身份执行此命令"
             );
 
             return true;

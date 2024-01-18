@@ -29,3 +29,6 @@ pregeneration-mode:
   enable: False
 pregame:
   border-radius: 20
+auto-start:
+  players-pre-team: 1
+  min-players: 6

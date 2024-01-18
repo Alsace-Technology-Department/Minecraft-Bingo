@@ -12,14 +12,14 @@ public class TimeUtil {
      * @param timeLeft The time left in seconds
      */
     public static void broadcastTimeLeft(long timeLeft) {
-        String message = Game.PREFIX + "Time left: " + ChatColor.YELLOW + "%d" + ChatColor.WHITE + " %s";
+        String message = Game.PREFIX + "倒计时: " + ChatColor.YELLOW + "%d" + ChatColor.WHITE + " %s";
         long minutesLeft = timeLeft / 60;
 
         // More than 5 minutes left
         if (timeLeft > 5 * 60) {
             // Broadcast every 5 minutes
             if (timeLeft % (5 * 60) == 0) {
-                message = String.format(message, minutesLeft, "minutes");
+                message = String.format(message, minutesLeft, "分钟");
 
                 Bukkit.broadcastMessage(message);
             }
@@ -27,20 +27,14 @@ public class TimeUtil {
             // Less than 5 minutes left, more than 10 seconds
             // Broadcast every minute
             if (timeLeft % 60 == 0) {
-                String minutes = "minutes";
-                if (timeLeft == 60) {
-                    minutes = "minute";
-                }
+                String minutes = "分钟";
                 message = String.format(message, minutesLeft, minutes);
 
                 Bukkit.broadcastMessage(message);
             }
         } else if (timeLeft > 0) {
             // At most 10 seconds left
-            String seconds = "seconds";
-            if (timeLeft == 1) {
-                seconds = "second";
-            }
+            String seconds = "秒";
             message = String.format(message, timeLeft, seconds);
 
             Bukkit.broadcastMessage(message);
