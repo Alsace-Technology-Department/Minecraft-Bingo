@@ -1,12 +1,12 @@
-enable-blacklist: True
-default-item-distribution: "2,6,9,6,2"
-default-num-lines-complete-for-win: 1
-show-currently-winning-team: True
-notify-other-team-completions: True
-prevent-water-spawns: True
-show-all-maps-after-game: True
-give-all-recipes: True
-freeze-time-on-start: 5
+enable-blacklist: True # 开启黑名单
+default-item-distribution: "2,6,9,6,2" # 物品出现比例
+default-num-lines-complete-for-win: 1 # 默认完成多少行会获胜
+show-currently-winning-team: True # 显示当前获胜团队
+notify-other-team-completions: True # 通知其他团队完成情况
+prevent-water-spawns: True # 防止水生成
+show-all-maps-after-game: True # 在游戏结束后向玩家展示所有队伍的收集情况
+give-all-recipes: True # 给出所有物品
+freeze-time-on-start: 5 # 开始冷却时间
 notify-progress:
   lines:
     - each
@@ -18,17 +18,17 @@ notify-progress:
     - 5
     - 10
 border:
-  enable: True
-  overworld-size: 3000
-  nether-size: 1000
+  enable: True # 是否开启世界边界
+  overworld-size: 3000 # 主世界边界
+  nether-size: 1000 # 下界边界
   override-world-generation: False
 timer:
   enable: True
   length: 1800
 pregeneration-mode:
-  enable: False
+  enable: False # 预生成模式
 pregame:
-  border-radius: 20
+  border-radius: 20 # 出生点范围
 auto-start:
-  players-pre-team: 1
-  min-players: 6
+  players-pre-team: 1 # 每支队伍人数
+  min-players: 6 # 自动开启最小人数

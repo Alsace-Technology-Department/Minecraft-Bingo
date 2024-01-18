@@ -76,3 +76,17 @@ MinecraftBingo是Minecraft中的一种游戏模式，团队之间争夺以收集
 这些边界的大小可以在配置文件中设置：`border.overworld-size`和`border.nether-size`。
 此过程将生成世界边界内的所有区块，包括世界边界外2个区块的缓冲区。
 完成后，overworld和nether的目录将被压缩为`world[number].zip`并放置在`<server>/plugins/MinecrftBingo/worlds/`目录中。
+
+## 自动开始游戏
+玩家在进入游戏后，人数达到配置文件中`min-players`的值时，将开始倒计时，倒计时结束后会自动开始
+
+游戏结束后会在20s内关闭服务器，如果想实现自动重置可以使用以下shell脚本
+``` shell
+#!/bin/sh
+script_dir="$(cd "$(dirname "$0")" && pwd)"
+while [ -f "$script_dir/isstart" ]; do # 检测游戏目录下是否存在文件“isstart”，如果存在则重启，不存在则关闭
+    java -jar paper-1.20.1-196.jar nogui
+    rm -rf world* # 删除所有世界
+done
+
+```
