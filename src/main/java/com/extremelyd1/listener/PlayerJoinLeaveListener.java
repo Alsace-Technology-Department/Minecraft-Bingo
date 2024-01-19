@@ -172,7 +172,15 @@ public class PlayerJoinLeaveListener implements Listener {
                     seconds--;
                 } else {
                     Collection<? extends Player> players = Bukkit.getOnlinePlayers();
-                    int numTeams = players.size() / game.getConfig().getPlayerPreTeam();
+                    //设置每队最多人数
+                    int playersPreTeam = 2;
+                    if (players.size() > 10 && players.size() <= 16) {
+                        playersPreTeam = 3;
+                    } else if (players.size() > 16) {
+                        playersPreTeam = 4;
+                    }
+                    //计算队伍数量
+                    int numTeams = (players.size() + playersPreTeam - 1) / playersPreTeam;
                     game.getTeamManager().createRandomizedTeams(
                             players,
                             numTeams,

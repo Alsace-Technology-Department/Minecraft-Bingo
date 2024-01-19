@@ -1,6 +1,7 @@
 package com.extremelyd1.game.team;
 
 import com.extremelyd1.game.Game;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -122,6 +123,14 @@ public class TeamManager {
      * @param notify Whether to notify the player of their new team
      */
     public void addPlayerToTeam(Player player, Team team, boolean notify) {
+        if (team.getNumPlayers() >= game.getConfig().getMaxPlayers()) {
+            player.sendMessage(ChatColor.DARK_RED
+                    + "Error: "
+                    + ChatColor.WHITE
+                    + "队伍人数已满");
+            return;
+
+        }
         removePlayerFromTeam(player);
         team.addPlayer(player, notify);
 

@@ -30,5 +30,5 @@ pregeneration-mode:
 pregame:
   border-radius: 20 # 出生点范围
 auto-start:
-  players-pre-team: 1 # 每支队伍人数
-  min-players: 6 # 自动开启最小人数
+  min-players: 8 # 自动开启最小人数
+max-players-pre-team: 4 #每支队伍最多能容纳的人数

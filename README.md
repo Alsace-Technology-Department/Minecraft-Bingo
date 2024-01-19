@@ -1,6 +1,8 @@
 # MinecraftBingo
 Minecraft中的物品Bingo
 
+Forked by [https://github.com/Extremelyd1/minecraft-bingo/tree/v1.10.0](https://github.com/Extremelyd1/minecraft-bingo/tree/v1.10.0)
+
 ![物品Bingo](https://i.imgur.com/7qXBAQK.png)
 
 ## 什么是MinecraftBingo？

@@ -110,18 +110,18 @@ public class Config {
     private final int preGameBorderRadius;
 
     /**
-     * When automatically starting the game, the number of players in each team
-     */
-    private final int playerPreTeam;
-
-    /**
      * When the number of players reaches this number, it will automatically start
      */
     private final int minPlayers;
 
+    /**
+     * The maximum number of people a team can accommodate
+     */
+    private final int maxPlayers;
+
     public Config(JavaPlugin plugin) throws IllegalArgumentException {
         plugin.saveDefaultConfig();
-        
+
         FileConfiguration config = plugin.getConfig();
 
         enableBlacklist = config.getBoolean("enable-blacklist");
@@ -176,12 +176,13 @@ public class Config {
 
         preGameBorderRadius = config.getInt("pregame.border-radius");
 
-        playerPreTeam = config.getInt("auto-start.players-pre-team");
         minPlayers = config.getInt("auto-start.min-plaers");
+        maxPlayers = config.getInt("max-players-pre-team");
     }
 
     /**
      * Parse the given string value to an integer or throw a exception if not possible
+     *
      * @param stringValue The string value to parse
      * @return The parsed integer value
      */
@@ -228,11 +229,11 @@ public class Config {
             int numCTierItems,
             int numDTierItems
     ) {
-       this.numSTierItems = numSTierItems;
-       this.numATierItems = numATierItems;
-       this.numBTierItems = numBTierItems;
-       this.numCTierItems = numCTierItems;
-       this.numDTierItems = numDTierItems;
+        this.numSTierItems = numSTierItems;
+        this.numATierItems = numATierItems;
+        this.numBTierItems = numBTierItems;
+        this.numCTierItems = numCTierItems;
+        this.numDTierItems = numDTierItems;
     }
 
     public int getDefaultNumLinesComplete() {
@@ -303,11 +304,11 @@ public class Config {
         return preGameBorderRadius;
     }
 
-    public int getPlayerPreTeam() {
-        return playerPreTeam;
-    }
-
     public int getMinPlayers() {
         return minPlayers;
+    }
+
+    public int getMaxPlayers() {
+        return maxPlayers;
     }
 }
