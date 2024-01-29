@@ -11,10 +11,13 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Collection;
+import java.util.Objects;
 import java.util.UUID;
 
 public class PlayerJoinLeaveListener implements Listener {
@@ -108,6 +111,9 @@ public class PlayerJoinLeaveListener implements Listener {
                         + ChatColor.WHITE + " joined"
         );
 
+        if (game.getState().equals(Game.State.PRE_GAME)) {
+            Game.giveBackLobbyItem(player);
+        }
         checkStartCountdown();
     }
 
@@ -194,5 +200,4 @@ public class PlayerJoinLeaveListener implements Listener {
             }
         }.runTaskTimer(plugin, 0L, 20L);
     }
-
 }

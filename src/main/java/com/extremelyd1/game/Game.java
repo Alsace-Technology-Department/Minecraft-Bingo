@@ -31,10 +31,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 import java.util.logging.Logger;
 
 public class Game {
@@ -46,7 +43,7 @@ public class Game {
     /**
      * The divider string
      */
-    private static final String         DIVIDER = PREFIX + ChatColor.STRIKETHROUGH
+    private static final String DIVIDER = PREFIX + ChatColor.STRIKETHROUGH
             + "                                                                        ";
 
     /**
@@ -478,6 +475,7 @@ public class Game {
                             inventoryIndex++,
                             bingoCardItemStacks.get(otherTeam)
                     );
+                    giveBackLobbyItem(onlinePlayer);
                 }
             }
             Bukkit.broadcastMessage(ChatColor.YELLOW + "地图正在重置，20s后将传送回大厅");
@@ -495,6 +493,15 @@ public class Game {
         if (config.isTimerEnabled()) {
             gameTimer.cancel();
         }
+    }
+
+    public static void giveBackLobbyItem(Player onlinePlayer) {
+        ItemStack leaveitem = new ItemStack(Objects.requireNonNull(Material.getMaterial("IRON_DOOR")), 1);
+        ItemMeta commeta = leaveitem.getItemMeta();
+        assert commeta != null;
+        commeta.setDisplayName("离开游戏");
+        leaveitem.setItemMeta(commeta);
+        onlinePlayer.getInventory().setItem(8, leaveitem);
     }
 
     /**

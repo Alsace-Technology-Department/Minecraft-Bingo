@@ -15,6 +15,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityPickupItemEvent;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerBucketFillEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
@@ -26,6 +27,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class ItemListener implements Listener {
 
@@ -196,6 +198,43 @@ public class ItemListener implements Listener {
                     e.getPlayer(),
                     Material.DRAGON_BREATH
             );
+        }
+    }
+
+    @EventHandler
+    public void onInventoryClick(InventoryClickEvent e) {
+        if (e.getClick().isKeyboardClick()) {
+            e.setCancelled(true);
+        }
+        if (!(e.getWhoClicked() instanceof Player player)) return;
+        if (!game.getState().equals(Game.State.IN_GAME)) {
+            if (e.getClickedInventory() != null) {
+                ItemStack itemStack = e.getClickedInventory().getItem(e.getSlot());
+                if (itemStack != null) {
+                    if (Objects.equals(itemStack.getType(), Material.getMaterial("IRON_DOOR"))) {
+                        player.kickPlayer("Back to Lobby");
+                    }
+                }
+            }
+        }
+    }
+
+    @EventHandler
+    public void onPlayerClick(PlayerInteractEvent event) {
+        Player player = event.getPlayer();
+        if (!game.getState().equals(Game.State.IN_GAME)) {
+            if (Objects.requireNonNull(event.getItem()).getType().equals(Material.getMaterial("IRON_DOOR"))) {
+                player.kickPlayer("Back to Lobby");
+            }
+        }
+    }
+
+    @EventHandler
+    public void onPlayerDropItemUnGame(PlayerDropItemEvent event) {
+        if (!game.getState().equals(Game.State.IN_GAME)) {
+            if (!event.getPlayer().isOp()) {
+                event.setCancelled(true);
+            }
         }
     }
 
