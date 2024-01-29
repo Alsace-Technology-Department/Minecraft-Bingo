@@ -176,7 +176,7 @@ public class Config {
 
         preGameBorderRadius = config.getInt("pregame.border-radius");
 
-        minPlayers = config.getInt("auto-start.min-plaers");
+        minPlayers = config.getInt("auto-start.min-players");
         maxPlayers = config.getInt("max-players-pre-team");
     }
 
