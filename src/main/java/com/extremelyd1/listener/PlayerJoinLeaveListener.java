@@ -11,13 +11,10 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Collection;
-import java.util.Objects;
 import java.util.UUID;
 
 public class PlayerJoinLeaveListener implements Listener {
@@ -179,14 +176,12 @@ public class PlayerJoinLeaveListener implements Listener {
                 } else {
                     Collection<? extends Player> players = Bukkit.getOnlinePlayers();
                     //设置每队最多人数
-                    int playersPreTeam = 2;
-                    if (players.size() > 10 && players.size() <= 16) {
-                        playersPreTeam = 3;
-                    } else if (players.size() > 16) {
-                        playersPreTeam = 4;
+                    int numTeams = 2;
+                    if (players.size() > 8 && players.size() < 16) {
+                        numTeams = 3;
+                    } else if (players.size() >= 16) {
+                        numTeams = 4;
                     }
-                    //计算队伍数量
-                    int numTeams = (players.size() + playersPreTeam - 1) / playersPreTeam;
                     game.getTeamManager().createRandomizedTeams(
                             players,
                             numTeams,
